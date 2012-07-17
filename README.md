@@ -28,6 +28,6 @@ app_name  = 'sirportly'
 log_name  = 'workers'
 message   = "Hello there! This is a test of my log server..."
 socket    = UDPSocket.new
-data      = [app_name.bytesize, app_name, log_name.bytesize, log_name.to_s, message.bytesize, message, 0].pack('nA*nA*nA*n')
+data      = [app_name.bytesize, app_name, log_name.bytesize, log_name, message.bytesize, message, 0].pack('nA*nA*nA*n')
 socket.send(data, 0, '1.2.3.4', 4455)
 ```
