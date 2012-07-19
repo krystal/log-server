@@ -31,3 +31,9 @@ socket    = UDPSocket.new
 data      = [app_name.bytesize, app_name, log_name.bytesize, log_name, message.bytesize, message, 0].pack('nA*nA*nA*n')
 socket.send(data, 0, '1.2.3.4', 4455)
 ```
+
+This works well with our [log server IO](https://github.com/atech/log-server-io) class which can easily be used with loggers.
+
+```ruby
+logger = Logger.new(Atech::NetworkLogIO.new(:host => '1.2.3.4', :app_name => 'demo', :log_name => 'app'))
+```
