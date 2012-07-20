@@ -19,10 +19,10 @@ loop do
   l = data.read(2).unpack('n')[0]
   log_name = data.read(l)
   
-  full_log_name = File.join(app_name, log_name + '.log')
+  full_log_name = File.expand_path(File.join(app_name, log_name + '.log'), "/")
   log_path = File.join(File.expand_path('../logs', __FILE__), full_log_name)
-  FileUtils.mkdir_p(File.dirname(log_path))
   unless logger = loggers[full_log_name]
+    FileUtils.mkdir_p(File.dirname(log_path))
     logger = loggers[full_log_name] = Logger.new(log_path, 10, 1024000)
     logger.formatter = proc { |_,_,_,msg| msg + "\n" }
   end
